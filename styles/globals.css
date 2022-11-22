@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('http://fonts.cdnfonts.com/css/amazon-ember'); 
+
+
+html,body {
+    margin:0;
+    padding:0;
+    height: 100%;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    background:#111;
+
+}
+
+::-webkit-scrollbar {
+    width:7px;
+  }
+  ::-webkit-scrollbar-track{
+    background:black;
+  }
+  ::-webkit-scrollbar-thumb{
+    background:rgba(30, 30, 30, 0.721);
+  }
+
+.slick-track {
+    display:flex !important;
+    margin-left:0 !important
+}
+
+.slick-prev:before, .slick-next:before {
+    font-size: 2.5rem !important;
+    display:none
+   
+}
+
+.slick-slider:hover .slick-prev:before{
+    display:block !important;
+}
+.slick-slider:hover .slick-next:before{
+    display:block !important;
+}
+.slick-prev, .slick-next {
+    top : 37% !important;
+}
+.slick-arrow {
+    z-index:99999 !important;
+}
+
+
+
+.slick-next {
+    right: 1px !important;
+    width:auto !important;
+    height:auto !important;
+}
+
+.slick-prev {
+    left: -18px !important;
+    width:auto !important;
+    height:auto !important;
+    
+  }
+
+.head {
+    background-size:cover;
+    box-shadow:grey 0px 11px 0px -10px inset, #111 0px -117px 50px -10px inset;
+    width:100%;
+    height:850px;
+
+}
+
+
+@media screen and (max-width: 482px) {
+    .head {
+      height:350px;
+    }
+  }
+
+  
+@media screen and (max-width: 882px) {
+    .head {
+      height:450px;
+    }
+  }
+
+/* .slick-list{
+  padding:1rem !important;
+  padding-top:0 !important;
+} */
+
+.slick-prev.slick-disabled:before, .slick-next.slick-disabled:before {
+    opacity: 0 !important;
+}
+
+#next {
+  opacity:0;
+  height:320px;
+}
+#prev {
+  opacity:0;
+  height:320px;
+  margin-left:auto
+
+}
+
+.slick-slider:hover #next{
+  opacity:1 !important;
+}
+.slick-slider:hover #prev{
+  opacity:1 !important;
+}
+/* .slick-slide.slick-active.slick-current {
+    position: absolute !important;
+} */
+
+.active {
+  background:red
+}
+
+.slidecard .slick-slide {
+  margin-left: 7px;
+}
+
+
+.watchcard #next {
+  height: 184px;
+}
+
+.watchcard #prev {
+  height: 184px;
+}
