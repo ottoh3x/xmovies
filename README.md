@@ -1,12 +1,12 @@
 <div align="center">
-<h1>xMovies</h1>
+<h1>OTMovies</h1>
 
 
-### xMovies is a website where you can watch Movies,Series & Animes.
+### OTMovies is a website where you can watch Movies,Series & Animes.
 
 Since it is an open-source project, there won't be any ads in this website.
 
-The official website is [xmovies.vercel.app](https://[xmovies.vercel.app)
+The official website is [otmovies.vercel.app](https://[otmovies.vercel.app)
 
 </div>
 <h3>Features:</h3>
