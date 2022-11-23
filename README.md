@@ -1,27 +1,51 @@
-# Next.js + Tailwind CSS Example
+<div align="center">
+<h1>OTMovies</h1>
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
 
-## Deploy your own
+### OTMovies is a website where you can watch Movies,Series & Animes.
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+Since it is an open-source project, there won't be any ads in this website.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+The official website is [otmovies.vercel.app](https://[otmovies.vercel.app)
 
-## How to use
+</div>
+<h3>Features:</h3>
+<ul>
+    <li>✔ No Ads.</li>
+    <li>✔ Fast Streaming.</li>
+    <li>✔ The browser store your last tv show episode & you can add movies to your list without logging in.</li>
+<!--     <li>✔ PWA => You can install the app into your desktop or mobile.</li> -->
+    <li>✔ Download Movies.</li>
+ </ul>
+    
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-```
+<h3>Screenshots:</h3>
 
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
+![image](https://i.imgur.com/zai2s5S.png)
+![image](https://i.imgur.com/KDchhGG.png)
+![image](https://i.imgur.com/KvjH9b9.png)
+![image](https://i.imgur.com/qv6Tgx7.png)
+![image](https://i.imgur.com/x3S5R53.png)
 
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+**<h3>Technologies:</h3>**
+    <ul>
+    <li>✔ NextJS</li>
+    <li>✔ TailwindCSS</li>
+    <li>✔ Redux</li>
+    <li>✔ PWA - Progressive Web App</li>
+    <li>✔ Swiper-JS</li>
+    <li>✔ Framer Motion</li>
+ </ul>
+ 
+ ### Support
+
+Consider showing some support with a cup of coffee.
+
+<a href="https://www.buymeacoffee.com/ottoprogrammer"><img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-1.svg" height="35px"/></a>
+
+<br/>
+<!-- LICENSE -->
+
+Copyright © 2022 Otto Programmer
