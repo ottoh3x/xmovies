@@ -42,7 +42,7 @@ function ContinueWatchingCard(movie:ContinueWatchingCardProps) {
         width: "100%",
         height: "184px",
         boxShadow:
-          "grey 0px 11px 0px -10px inset, #111 0px -68px 50px -10px inset",
+          "black 0px 11px 0px -10px inset, #111 0px -68px 50px -10px inset",
       }}
     >
       {" "}

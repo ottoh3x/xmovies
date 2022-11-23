@@ -78,7 +78,7 @@ const handleMovieCategory = (e:any) => {
               className="text-white font-bold text-2xl cursor-pointer text-center"
               onClick={h.handleSideNav}
             >
-              OTTO MOVIES
+              OTMOVIES
             </h1>
           </div>
 
