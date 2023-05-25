@@ -18,6 +18,12 @@ function Movies() {
         }
     },[page])
 
+
+    const fetchData = async () => {
+      let url = `https://api.consumet.org/meta/tmdb/info/60735`
+      let req = await fetch(url)
+    }
+
     const fetchMovies = async () => {
       let req  = await axios.get(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page=${page}&api_key=cfe422613b250f702980a3bbf9e90716`)
       let res = req.data

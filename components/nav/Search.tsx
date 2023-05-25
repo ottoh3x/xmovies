@@ -48,9 +48,9 @@ function Search() {
   };
 
   return (
-    <div className="cursor-pointer right-0">
+    <div className="cursor-pointer right-0 bg-[#222] w-[18rem]  rounded-full">
       <div
-        className={` text-white h-10 w-10  rounded-full flex items-center p-2.5 shadow-2xl relative right-0`}
+        className={` text-white h-10 w-10   flex items-center p-2.5 shadow-2xl relative right-0`}
         id="search"
         onClick={handleClick}
       >
