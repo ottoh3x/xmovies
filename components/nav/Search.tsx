@@ -42,13 +42,13 @@ function Search() {
     var SearchBar:any = document.getElementById("search");
     var SearchInput:any = document.getElementById("searchinput");
     SearchInput.focus();
-    SearchInput.style.maxWidth = "800px";
+    SearchInput.style.maxWidth = "18rem";
     SearchInput.style.marginLeft = "0.7rem";
     SearchBar.style.width = "auto";
   };
 
   return (
-    <div className="cursor-pointer right-0 bg-[#222] w-[18rem]  rounded-full">
+    <div className="cursor-pointer right-0 bg-[#222] rounded-full w-[18rem]">
       <div
         className={` text-white h-10 w-10   flex items-center p-2.5 shadow-2xl relative right-0`}
         id="search"
