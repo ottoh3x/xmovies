@@ -1,4 +1,4 @@
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
@@ -22,11 +22,12 @@ function timeConvert(n: any) {
   return rhours + "h " + rminutes + "m.";
 }
 
-function MovieEpisode(res: any) {
+function MovieEpisode(res: any,tmdb:any) {
   const [data, setData] = useState<any>(res.res);
   const [recommended, setRecommended] = useState<any>([]);
   const [casts, setCasts] = useState<any>([]);
   const [movieData, setMovieData] = useState<any>([]);
+  const [stream, setStream] = useState<any>([]);
   const { MyList,ContinueWatching } = useSelector((state: any) => state);
   const [click, setClick] = useState(false);
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ function MovieEpisode(res: any) {
     fetchImdbData();
     fetchCasts();
     setData(res.res)
-
+    fetchStream()
 
     
     
@@ -60,6 +61,13 @@ function MovieEpisode(res: any) {
   }, [id, imdbId,res]);
 
 
+  const fetchStream = async () => {
+    let url = `https://api.consumet.org/meta/tmdb/watch/${tmdb.episodeId}?id=${tmdb.id}`
+    let req = await fetch(url)
+    let res = await req.json()
+    setStream(res)
+  }
+console.log(tmdb)
   const handleIframe  = () => {
 
     const currentWatching = ContinueWatching.filter((item: any) => item.id == id);
@@ -148,13 +156,32 @@ function MovieEpisode(res: any) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context: any) => {
-  let id = context.params.id;
-  let url = `https://api.themoviedb.org/3/movie/${id}?api_key=cfe422613b250f702980a3bbf9e90716`;
-  let req = await fetch(url);
-  let res = await req.json();
+// export const getServerSideProps: GetServerSideProps = async (context: any) => {
+//   let id = context.params.id;
+//   let url = `https://api.themoviedb.org/3/movie/${id}?api_key=cfe422613b250f702980a3bbf9e90716`;
+//   let req = await fetch(url);
+//   let res = await req.json();
 
-  return { props: { res } };
-};
+//   return { props: { res } };
+// };
 
 export default MovieEpisode;
+
+export async function getStaticPaths() {
+  return { paths: [], fallback: "blocking" };
+}
+
+
+export const getStaticProps = async (context: any) => {
+  let id = context.params.id;
+  let url1 = `https://api.themoviedb.org/3/movie/${id}?api_key=cfe422613b250f702980a3bbf9e90716`;
+  let req1 = await fetch(url1);
+  let res = await req1.json();
+  let url = `https://api.consumet.org/meta/tmdb/info/${id}?type=Movie`;
+  let req = await fetch(url);
+  let tmdb = await req.json();
+
+  return { props: { tmdb,res } };
+};
+
+
