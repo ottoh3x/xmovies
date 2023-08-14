@@ -59,7 +59,7 @@ function MovieEpisode(resp: any,tmdb:any) {
   //     })
      
   // }, [stream]);
-  const subs = []
+  const subs :any = []
   const subtitles = () => {
     for (let i=0;i<stream?.subtitles?.length;i++) { subs.push({default : false,name:stream?.subtitles[i]?.lang,src:stream?.subtitles[i].url}) }
     return subs
