@@ -12,6 +12,11 @@ import { FaPlay } from "react-icons/fa";
 import { GrAdd } from "react-icons/gr";
 import { AiFillYoutube } from "react-icons/ai";
 import { SetContinueWatching } from "../../redux/actions/tvShowAction";
+import EnimePlayer from "../../components/player/Player";
+
+
+
+
 
 function timeConvert(n: any) {
   var num = n;
@@ -22,8 +27,8 @@ function timeConvert(n: any) {
   return rhours + "h " + rminutes + "m.";
 }
 
-function MovieEpisode(res: any,tmdb:any) {
-  const [data, setData] = useState<any>(res.res);
+function MovieEpisode(resp: any,tmdb:any) {
+  const [data, setData] = useState<any>(resp.resp);
   const [recommended, setRecommended] = useState<any>([]);
   const [casts, setCasts] = useState<any>([]);
   const [movieData, setMovieData] = useState<any>([]);
@@ -31,6 +36,7 @@ function MovieEpisode(res: any,tmdb:any) {
   const { MyList,ContinueWatching } = useSelector((state: any) => state);
   const [click, setClick] = useState(false);
   const dispatch = useDispatch();
+  const [source, setSource] = useState<any>()
 
   const router = useRouter();
   const { id } = router.query;
@@ -42,32 +48,48 @@ function MovieEpisode(res: any,tmdb:any) {
 
   console.log(data);
 
-  
+  // useEffect(() => {
+
+  //   player?.current
+  //     ?.changeSource({
+  //       src: stream?.sources?.filter((t:any) => t.quality == "auto")[0]?.url,
+  //       title:"props.title",
+  //       poster: "https://i.imgur.com/M2aFrfc.jpeg"
+        
+  //     })
+     
+  // }, [stream]);
+
   useEffect(() => {
     fetchRecommended();
     fetchImdbId();
     fetchImdbData();
     fetchCasts();
-    setData(res.res)
+    setData(resp.resp)
     fetchStream()
 
-    
+    // setSource(
+    //   // Be a Promise or raw
+    //   fetch(`xxxx`).then((it) => {
+    //     return it
+    //   })
+    // )
     
     
     const current = MyList.filter((item: any) => item.id == id);
     current.length > 0 ? setClick(true) : setClick(false);
 
     
-  }, [id, imdbId,res]);
+  }, [id, imdbId,resp]);
 
 
   const fetchStream = async () => {
-    let url = `https://api.consumet.org/meta/tmdb/watch/${tmdb.episodeId}?id=${tmdb.id}`
+    let url = `https://api.consumet.org/meta/tmdb/watch/${resp?.tmdb?.episodeId}?id=${resp?.tmdb.id}`
     let req = await fetch(url)
     let res = await req.json()
     setStream(res)
   }
-console.log(tmdb)
+console.log(resp)
   const handleIframe  = () => {
 
     const currentWatching = ContinueWatching.filter((item: any) => item.id == id);
@@ -135,12 +157,13 @@ console.log(tmdb)
           
           
           <div className=" mx-auto mt-8">
-            <iframe
+            {/* <iframe
             onLoadCapture={handleIframe}
               className="p-2 w-full h-[270px] lg:h-[872px] mx-auto"
               src={`https://www.2embed.to/embed/tmdb/movie?id=${id}`}
               allowFullScreen
-            ></iframe>
+            ></iframe> */}
+            <EnimePlayer  src={stream?.sources  ? stream?.sources?.filter((t:any) => t.quality == "auto")[0]?.url : ""} poster="" title={data?.title}/>
 
             <HomeContainer Data={casts} heading="Casts" />
 
@@ -176,12 +199,12 @@ export const getStaticProps = async (context: any) => {
   let id = context.params.id;
   let url1 = `https://api.themoviedb.org/3/movie/${id}?api_key=cfe422613b250f702980a3bbf9e90716`;
   let req1 = await fetch(url1);
-  let res = await req1.json();
+  let resp = await req1.json();
   let url = `https://api.consumet.org/meta/tmdb/info/${id}?type=Movie`;
   let req = await fetch(url);
   let tmdb = await req.json();
 
-  return { props: { tmdb,res } };
+  return { props: { tmdb,resp } };
 };
 
 
