@@ -59,6 +59,13 @@ function MovieEpisode(resp: any,tmdb:any) {
   //     })
      
   // }, [stream]);
+  const subs = []
+  const subtitles = () => {
+    for (let i=0;i<stream?.subtitles?.length;i++) { subs.push({default : false,name:stream?.subtitles[i]?.lang,src:stream?.subtitles[i].url}) }
+    return subs
+  } 
+
+  console.log(subtitles())
 
   useEffect(() => {
     fetchRecommended();
@@ -163,7 +170,7 @@ console.log(resp)
               src={`https://www.2embed.to/embed/tmdb/movie?id=${id}`}
               allowFullScreen
             ></iframe> */}
-            <EnimePlayer  src={stream?.sources  ? stream?.sources?.filter((t:any) => t.quality == "auto")[0]?.url : ""} poster="" title={data?.title}/>
+            <EnimePlayer subtitles={subtitles()} src={stream?.sources  ? stream?.sources?.filter((t:any) => t.quality == "auto")[0]?.url : ""} poster="" title={data?.title}/>
 
             <HomeContainer Data={casts} heading="Casts" />
 

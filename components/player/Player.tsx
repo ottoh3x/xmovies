@@ -22,7 +22,8 @@ interface OplayerProps {
   goNext?:any;
   isAutoNext?:any;
   reload?:any;
-  ref?:any
+  ref?:any;
+  subtitles?:any;
 }
 
 export const plugins = [
@@ -44,7 +45,7 @@ export const plugins = [
       source: [
         {
           name: 'English',
-          src: 'https://cc.2cdns.com/5f/da/5fdaec1b7e6f4ae64a8814e001a55d4d/eng-2.vtt'
+          src: "https://cc.2cdns.com/9d/c4/9dc448b6d9554a3fc205b6dd7b5514fd/9dc448b6d9554a3fc205b6dd7b5514fd.vtt"
         }
       ]
     }, 
@@ -81,6 +82,8 @@ const EnimePlayer = (props: OplayerProps) => {
         poster:props.poster,
         
       })
+
+      player.current!.context.ui.subtitle.updateSource(props.subtitles)
       
   }, [props.src]);
 
