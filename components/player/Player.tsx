@@ -85,7 +85,7 @@ const EnimePlayer = (props: OplayerProps) => {
 
       player.current!.context.ui.subtitle.updateSource(props.subtitles)
       
-  }, [props.src]);
+  }, []);
 
 
 

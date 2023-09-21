@@ -16,7 +16,44 @@ import EnimePlayer from "../../components/player/Player";
 
 
 
-
+const s = [
+  {
+  "url": "https://ccb.megaresources.co/56/26/5626ce43b9c4f3419805884cba4b0505/ara-6.vtt",
+  "lang": "Arabic"
+  },
+  {
+  "url": "https://ccb.megaresources.co/56/26/5626ce43b9c4f3419805884cba4b0505/eng-2.vtt",
+  "lang": "English"
+  },
+  {
+  "url": "https://ccb.megaresources.co/56/26/5626ce43b9c4f3419805884cba4b0505/fre-7.vtt",
+  "lang": "French"
+  },
+  {
+  "url": "https://ccb.megaresources.co/56/26/5626ce43b9c4f3419805884cba4b0505/ger-8.vtt",
+  "lang": "German"
+  },
+  {
+  "url": "https://ccb.megaresources.co/56/26/5626ce43b9c4f3419805884cba4b0505/ita-9.vtt",
+  "lang": "Italian"
+  },
+  {
+  "url": "https://ccb.megaresources.co/56/26/5626ce43b9c4f3419805884cba4b0505/por-3.vtt",
+  "lang": "Portuguese - Portuguese(Brazil)"
+  },
+  {
+  "url": "https://ccb.megaresources.co/56/26/5626ce43b9c4f3419805884cba4b0505/rus-10.vtt",
+  "lang": "Russian"
+  },
+  {
+  "url": "https://ccb.megaresources.co/56/26/5626ce43b9c4f3419805884cba4b0505/spa-5.vtt",
+  "lang": "Spanish"
+  },
+  {
+  "url": "https://ccb.megaresources.co/56/26/5626ce43b9c4f3419805884cba4b0505/spa-4.vtt",
+  "lang": "Spanish - Spanish(Latin_America)"
+  }
+  ]
 
 function timeConvert(n: any) {
   var num = n;
@@ -61,7 +98,7 @@ function MovieEpisode(resp: any,tmdb:any) {
   // }, [stream]);
   const subs :any = []
   const subtitles = () => {
-    for (let i=0;i<stream?.subtitles?.length;i++) { subs.push({default : false,name:stream?.subtitles[i]?.lang,src:stream?.subtitles[i].url}) }
+    for (let i=0;i<s.length;i++) { subs.push({default : false,name:s[i]?.lang,src:s[i].url}) }
     return subs
   } 
 
@@ -164,13 +201,13 @@ console.log(resp)
           
           
           <div className=" mx-auto mt-8">
-            {/* <iframe
+            <iframe
             onLoadCapture={handleIframe}
               className="p-2 w-full h-[270px] lg:h-[872px] mx-auto"
-              src={`https://www.2embed.to/embed/tmdb/movie?id=${id}`}
+              src={`https://autoembed.to/movie/tmdb/${id}`}
               allowFullScreen
-            ></iframe> */}
-            <EnimePlayer subtitles={subtitles()} src={stream?.sources  ? stream?.sources?.filter((t:any) => t.quality == "auto")[0]?.url : ""} poster="" title={data?.title}/>
+            ></iframe>
+            {/* <EnimePlayer subtitles={subtitles()} src={"https://ottocors.vercel.app/cors?url=https://tc-1.dayimage.net/_v6/380ccc6aa21d4e175c3ebbf36eb393af084ce3306d32c57b77f505d8efa16912eae144c75c5ade7b13650b17dcf40835ef450fe3ee65a3e131368f85213a25a32c278706ad24a408390dd213c35d9a6782294bd8e1b9751f2d95fec0ad3045054c047845049a3843204568183c0a93366fb074a9d9cb60b776336e9e525dddde/master.m3u8"} poster="" title={data?.title}/> */}
 
             <HomeContainer Data={casts} heading="Casts" />
 

@@ -155,7 +155,7 @@ function TvEpisode(res: any) {
               <iframe
                 onLoadCapture={handleIframe}
                 className=" w-[1000px] h-[300px] lg:h-[550px] mx-auto"
-                src={`https://www.2embed.to/embed/tmdb/tv?id=${id}&s=${dataState?.season}&e=${dataState?.ep_num}`}
+                src={`https://autoembed.to/tv/tmdb/${id}-${dataState?.season}-${dataState?.ep_num}`}
                 allowFullScreen
               ></iframe>
 
