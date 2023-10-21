@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToMyList, removeFromList } from "../../redux/actions/myListAction";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { FaPlay } from "react-icons/fa";
+import { FaImdb, FaPlay } from "react-icons/fa";
 import Container from "./Container";
 import Card from "./Card";
 import SimilarCard from "./SimilarCard";
@@ -172,7 +172,7 @@ function CardModal(card: CardModalProps) {
         }}
         exit={{ y: "100vh" }}
         ref={cardRef}
-        className="w-full max-w-[650px] bg-[#060606] h-full mx-auto shadow-2xl mt-[9rem] overflow-y-scroll scroll-smooth	 cursor-default my-12"
+        className="w-full max-w-[700px] 2xl:max-w-[800px] bg-[#060606] h-full mx-auto shadow-2xl mt-[9rem] overflow-y-scroll scroll-smooth	 cursor-default my-12"
         onClick={(e: any) => e.stopPropagation()}
       >
         {!isTrailer && (
@@ -267,32 +267,49 @@ function CardModal(card: CardModalProps) {
           </div>
           {heading !== "Casts" && (
             <div className="flex gap-1 mb-2">
+              <Link
+                href={
+                  card?.heading?.includes("Shows") || card.media_type == "tv"
+                    ? `/tv/${data.id}`
+                    : data.heading === "Casts"
+                    ? `/cast/${data.name + "-" + data.id}`
+                    : `/movie/${data.id}`
+                }
+              >
               <button
                 onClick={card.handleClick}
                 className="py-1 px-3 bg-violet-700 text-gray-200 rounded-sm font-semibold flex  items-center gap-2 hover:text-black hover:bg-gray-200 hover:scale-105 transition-all duration-500 easeInOut"
               >
-                <Link
-                  href={
-                    card?.heading?.includes("Shows") || card.media_type == "tv"
-                      ? `/tv/${data.id}`
-                      : data.heading === "Casts"
-                      ? `/cast/${data.name + "-" + data.id}`
-                      : `/movie/${data.id}`
-                  }
-                >
                   <div className="flex gap-2 items-center">
                     <FaPlay size={16} />
                     <span>PLAY</span>
                   </div>
-                </Link>
               </button>
+                </Link>
               <button
                 onClick={() => setIsTrailer(true)}
                 className="py-1 px-3 bg-red-600 text-gray-200 rounded-sm font-semibold flex  items-center gap-2 hover:text-black hover:bg-gray-200 hover:scale-105 transition-all duration-500 ease-in-out"
               >
                 <AiFillYoutube size={22} />
                 <span>TRAILER</span>
+
+                
               </button>
+              {data?.imdb_id && (
+
+              <a
+                href={`https://www.imdb.com/title/${data?.imdb_id}`}
+                target="_blank"
+                className="py-1 px-3 bg-[#DBA506] text-gray-200 rounded-sm font-semibold flex  items-center gap-2 hover:text-black hover:bg-gray-200 hover:scale-105 transition-all duration-500 ease-in-out"
+              >
+                <FaImdb size={22} />
+                <span>IMDB</span>
+
+                
+              </a>
+              )}
+
+              
               <div className="w-full flex justify-end">
                 {click ? (
                   <button

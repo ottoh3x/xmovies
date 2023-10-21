@@ -15,6 +15,7 @@ import {
   SetCurrentState,
 } from "../../redux/actions/tvShowAction";
 import { AnimatePresence, motion } from "framer-motion";
+import { currentEpisode } from "../../redux/reducers/tvShowReducer";
 const DetailContainer = dynamic(
   () => import("../../components/details/DetailContainer")
 );
@@ -53,6 +54,7 @@ function TvEpisode(res: any) {
     }
   });
 
+  console.log(currentEpisode)
   useEffect(() => {
     const ce = setCurrentSeason(dataState.season);
 
@@ -118,8 +120,86 @@ function TvEpisode(res: any) {
         <DetailContainer {...data} media_type="tv" />
         <div className="max-w-[1720px] mx-auto">
           <div>
-            <div className="flex flex-col-reverse lg:flex-row ">
-              <div className="flex flex-col gap-1 w-full max-h-[550px] overflow-y-scroll lg:max-w-[250px]">
+            <div className="flex flex-col ">
+              <div className="flex">
+
+
+              <div className="w-full">
+                
+              <iframe
+                onLoadCapture={handleIframe}
+                className=" w-full h-[300px] lg:h-[750px] mx-auto "
+                src={`https://autoembed.to/tv/tmdb/${id}-${dataState?.season}-${dataState?.ep_num}`}
+                allowFullScreen
+              ></iframe>
+              <div className="flex gap-1 p-1.5 justify-end">
+
+                <button onClick={() => SetCurrentEpisode(parseInt(dataState?.ep_num) - 1)} className="px-5 py-1 bg-neutral-800 hover:bg-[#4815ff] rounded-full">
+                  Previous
+                </button>
+              <button className="px-5 py-1 bg-neutral-800 hover:bg-[#4815ff] rounded-full">
+                  Next
+                </button>
+              </div>
+              </div>
+
+<div className="flex flex-col max-h-[750px] w-full  max-w-[500px]  overflow-y-scroll gap-2 ">
+              <AnimatePresence>
+                {showSeasons && (
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{
+                      scale: 1,
+                      type: "spring",
+                      transition: { duration: 0.1 },
+                    }}
+                    exit={{
+                      scale: 0,
+                      transition: { duration: 0.2 },
+                    }}
+                    className={`grid grid-cols-3 md:grid-cols-4 lg:grid-cols-3   gap-2  mx-2 transition-all`}
+                  >
+                    {data?.seasons
+                      ?.filter((f: any) => f.name !== "Specials")
+                      .map((s: any) => {
+                        return (
+                          s.air_date != null && (
+                            <div
+                              className={`${
+                                s.season_number === dataState?.season
+                                  ? " "
+                                  : "bg-neutral-900"
+                              }  cursor-pointer  text-center overflow-hidden text-ellipsis whitespace-nowrap	 rounded-md    transition-all`}
+                              key={s.season_number}
+                              onClick={() => {
+                                setCurrentSeason(s.season_number);
+                              }}
+                            >
+                              <img
+                                src={
+                                  `https://image.tmdb.org/t/p/original//${s?.poster_path}` ||
+                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png"
+                                }
+                                className="max-h-[340px] w-full object-cover"
+                              />
+
+                              {/* <h1 className="p-2">{s.name}</h1> */}
+                            </div>
+                          )
+                        );
+                      })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+              </div>
+
+
+              <div className="p-1">
+                <h1 className="p-2">Episodes:</h1>
+
+
+              <div className=" grid grid-cols-6 gap-1 w-full overflow-y-scroll lg:max-w-">
                 {sEpisodes?.map((ep: any) => (
                   <div
                     key={ep.episode_number}
@@ -135,6 +215,20 @@ function TvEpisode(res: any) {
                       );
                     }}
                   >
+<div className="">
+                <img
+                  className="flex-shrink-0 w-full h-[170px] rounded-sm object-cover"
+                  src={`https://www.themoviedb.org/t/p/original${ep.still_path}`}
+                  alt={ep.title}
+                />
+                {/* <small className="bg-neutral-900/80 font-black py-0.5 px-1.5 absolute top-0 left-0 rounded-br-lg">
+                  {ep.episode_number}
+                </small> */}
+                {/* <small className=" font-lighter p-0.5 ">
+                  {ep.name || "Episode " + ep.episode_number}
+                </small> */}
+              </div>
+
                     <h1
                       style={{ color: "white" }}
                       className={`${
@@ -152,14 +246,8 @@ function TvEpisode(res: any) {
                   </div>
                 ))}
               </div>
-              <iframe
-                onLoadCapture={handleIframe}
-                className=" w-[1000px] h-[300px] lg:h-[550px] mx-auto"
-                src={`https://autoembed.to/tv/tmdb/${id}-${dataState?.season}-${dataState?.ep_num}`}
-                allowFullScreen
-              ></iframe>
-
-            {/* <div
+              </div>
+            <div
               onClick={() => {
                 setShowSeasons(!showSeasons);
                 setIsOpen(!isOpen);
@@ -200,56 +288,8 @@ function TvEpisode(res: any) {
                   </svg>
                 )}
               </span>
-            </div> */}
-            <div className="flex flex-col max-h-[550px] w-[345px]  overflow-y-scroll gap-2 ">
-              <AnimatePresence>
-                {showSeasons && (
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{
-                      scale: 1,
-                      type: "spring",
-                      transition: { duration: 0.1 },
-                    }}
-                    exit={{
-                      scale: 0,
-                      transition: { duration: 0.2 },
-                    }}
-                    className={`grid grid-cols-3 md:grid-cols-4 lg:grid-cols-2  gap-2  mx-2 transition-all`}
-                  >
-                    {data?.seasons
-                      ?.filter((f: any) => f.name !== "Specials")
-                      .map((s: any) => {
-                        return (
-                          s.air_date != null && (
-                            <div
-                              className={`${
-                                s.season_number === dataState?.season
-                                  ? "bg-[#4815ffb3] scale:105"
-                                  : "bg-neutral-900"
-                              }  cursor-pointer  text-center overflow-hidden text-ellipsis whitespace-nowrap	 rounded-md  hover:bg-[#4815ff]  transition-all`}
-                              key={s.season_number}
-                              onClick={() => {
-                                setCurrentSeason(s.season_number);
-                              }}
-                            >
-                              <img
-                                src={
-                                  `https://image.tmdb.org/t/p/original//${s?.poster_path}` ||
-                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png"
-                                }
-                                className="max-h-[340px] w-full object-cover"
-                              />
-
-                              <h1 className="p-2">{s.name}</h1>
-                            </div>
-                          )
-                        );
-                      })}
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </div>
+            
             </div>
 
           </div>
@@ -267,7 +307,34 @@ function TvEpisode(res: any) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context: any) => {
+
+
+
+// TvEpisode.getInitialProps = async (context:any) => {
+//   let id = context.params.id;
+//   let url = `https://api.themoviedb.org/3/tv/${id}?api_key=cfe422613b250f702980a3bbf9e90716`;
+//   let req = await fetch(url);
+//   let res = await req.json();
+
+//   return { props: { res } };
+// };
+
+// export const getServerSideProps: GetServerSideProps = async (context: any) => {
+//   let id = context.params.id;
+//   let url = `https://api.themoviedb.org/3/tv/${id}?api_key=cfe422613b250f702980a3bbf9e90716`;
+//   let req = await fetch(url);
+//   let res = await req.json();
+
+//   return { props: { res } };
+// };
+
+
+export async function getStaticPaths() {
+  return { paths: [], fallback: "blocking" };
+}
+
+
+export const getStaticProps = async (context: any) => {
   let id = context.params.id;
   let url = `https://api.themoviedb.org/3/tv/${id}?api_key=cfe422613b250f702980a3bbf9e90716`;
   let req = await fetch(url);
@@ -275,5 +342,6 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
 
   return { props: { res } };
 };
+
 
 export default TvEpisode;

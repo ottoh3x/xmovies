@@ -64,7 +64,7 @@ function timeConvert(n: any) {
   return rhours + "h " + rminutes + "m.";
 }
 
-function MovieEpisode(resp: any,tmdb:any) {
+export default function MovieEpisode(resp: any,tmdb:any) {
   const [data, setData] = useState<any>(resp.resp);
   const [recommended, setRecommended] = useState<any>([]);
   const [casts, setCasts] = useState<any>([]);
@@ -232,7 +232,7 @@ console.log(resp)
 //   return { props: { res } };
 // };
 
-export default MovieEpisode;
+// export default MovieEpisode;
 
 export async function getStaticPaths() {
   return { paths: [], fallback: "blocking" };
