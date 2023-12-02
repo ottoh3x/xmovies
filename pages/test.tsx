@@ -121,6 +121,13 @@ console.log(b)
     <Layout title={"test"} >
     <div>
  
+ <iframe
+ src="https://embed.smashystream.com/fizzzz1.php?tmdb=85937&season=4&episode=11"
+ className="w-[1000px] h-[750px]"
+//  sandbox="true"
+ >
+
+ </iframe>
       {state > 0 && <div onClick={previous}>prev</div>}
       {state < 15 && <div onClick={next}>next</div>}
       

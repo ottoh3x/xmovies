@@ -218,7 +218,8 @@ function TvEpisode(res: any) {
 <div className="">
                 <img
                   className="flex-shrink-0 w-full h-[170px] rounded-sm object-cover"
-                  src={`https://www.themoviedb.org/t/p/original${ep.still_path}`}
+                  // src={`https://www.themoviedb.org/t/p/original${ep.still_path}`}
+                  src="https://i.imgur.com/Xj42miJg.jpg"
                   alt={ep.title}
                 />
                 {/* <small className="bg-neutral-900/80 font-black py-0.5 px-1.5 absolute top-0 left-0 rounded-br-lg">
