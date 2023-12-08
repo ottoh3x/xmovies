@@ -110,7 +110,7 @@ export default function MovieEpisode(resp: any,tmdb:any) {
     fetchImdbData();
     fetchCasts();
     setData(resp.resp)
-    fetchStream()
+    // fetchStream()
 
     // setSource(
     //   // Be a Promise or raw
@@ -127,12 +127,12 @@ export default function MovieEpisode(resp: any,tmdb:any) {
   }, [id, imdbId,resp]);
 
 
-  const fetchStream = async () => {
-    let url = `https://api.consumet.org/meta/tmdb/watch/${resp?.tmdb?.episodeId}?id=${resp?.tmdb.id}`
-    let req = await fetch(url)
-    let res = await req.json()
-    setStream(res)
-  }
+  // const fetchStream = async () => {
+  //   let url = `https://api.consumet.org/meta/tmdb/watch/${resp?.tmdb?.episodeId}?id=${resp?.tmdb.id}`
+  //   let req = await fetch(url)
+  //   let res = await req.json()
+  //   setStream(res)
+  // }
 console.log(resp)
   const handleIframe  = () => {
 
@@ -244,11 +244,11 @@ export const getStaticProps = async (context: any) => {
   let url1 = `https://api.themoviedb.org/3/movie/${id}?api_key=cfe422613b250f702980a3bbf9e90716`;
   let req1 = await fetch(url1);
   let resp = await req1.json();
-  let url = `https://api.consumet.org/meta/tmdb/info/${id}?type=Movie`;
-  let req = await fetch(url);
-  let tmdb = await req.json();
+  // let url = `https://api.consumet.org/meta/tmdb/info/${id}?type=Movie`;
+  // let req = await fetch(url);
+  // let tmdb = await req.json();
 
-  return { props: { tmdb,resp } };
+  return { props: { resp } };
 };
 
 
