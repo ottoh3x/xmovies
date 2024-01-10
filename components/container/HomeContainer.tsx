@@ -13,7 +13,21 @@ import ContinueWatchingCard from "./ContinueWatchingCard";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+// @ts-ignore
 
+import { EffectCoverflow, Autoplay } from "swiper/modules";
+
+
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+// @ts-ignore
+
+import "swiper/css";
+import "swiper/css/autoplay";
 
 
 interface HomeContainerProps {
@@ -21,6 +35,7 @@ interface HomeContainerProps {
   heading: string;
   setTypeMovies?: Dispatch<SetStateAction<any>>;
   setTypeTV?: Dispatch<SetStateAction<any>>;
+  swiperId:any
 }
 
 function HomeContainer(data: HomeContainerProps):any {
@@ -59,13 +74,72 @@ function HomeContainer(data: HomeContainerProps):any {
   const handleSimilar = () => {
     setSelected(false);
   };
+
+  const breakpoints = [
+    {
+      1600: {
+        settings: {
+          slidesPerView: data.heading === "Continue Watching" ? 4.2 : 6,
+          slidesToScroll: data.heading === "Continue Watching" ? 4.2 : 6,
+          initialSlide: 0
+        }
+      }
+    },
+    {
+      1400: {
+        settings: {
+          slidesPerView: data.heading === "Continue Watching" ? 4 : 6,
+          slidesToScroll: data.heading === "Continue Watching" ? 4 : 6
+        }
+      }
+    },
+    {
+      1240: {
+        settings: {
+          slidesPerView: data.heading === "Continue Watching" ? 3.4 : 5,
+          slidesToScroll: data.heading === "Continue Watching" ? 3.4 : 5
+        }
+      }
+    },
+    {
+      900: {
+        settings: {
+          slidesPerView: 4,
+          slidesToScroll: 4
+        }
+      }
+    },
+    {
+      600: {
+        settings: {
+          slidesPerView: 3.4
+        }
+      }
+    },
+    {
+      480: {
+        settings: {
+          slidesPerView: 2.8,
+          speed: 0
+        }
+      }
+    },
+    {
+      380: {
+        settings: {
+          slidesPerView: 2.5,
+          speed: 0
+        }
+      }
+    }
+  ];
 console.log(cardId)
   const settings = {
     dots: true,
     infinite: false,
     speed: 700,
     centerPadding : "70px",
-    slidesToShow: data.heading === "Continue Watching"  ? 5.6 :  data.heading === "Casts" ? 7 : 8,
+    slidesPerView: data.heading === "Continue Watching"  ? 5.6 :  data.heading === "Casts" ? 7 : 8,
     slidesToScroll: data.heading === "Continue Watching"  ? 5.6 :  data.heading === "Casts" ? 7 : 8,
     initialSlide: 0,
     beforeChange:beforeChange,
@@ -77,7 +151,7 @@ console.log(cardId)
       {
         breakpoint: 1600,
         settings: {
-          slidesToShow: data.heading === "Continue Watching" ? 4.2 : 6,
+          slidesPerView: data.heading === "Continue Watching" ? 4.2 : 6,
           slidesToScroll: data.heading === "Continue Watching" ? 4.2 : 6,
           initialSlide: 0,
           
@@ -87,7 +161,7 @@ console.log(cardId)
       {
         breakpoint: 1400,
         settings: {
-          slidesToShow: data.heading === "Continue Watching" ? 4 : 6,
+          slidesPerView: data.heading === "Continue Watching" ? 4 : 6,
           slidesToScroll: data.heading === "Continue Watching" ? 4 : 6,
          
           
@@ -96,7 +170,7 @@ console.log(cardId)
       {
         breakpoint: 1240,
         settings: {
-          slidesToShow: data.heading === "Continue Watching" ? 3.4 : 5,
+          slidesPerView: data.heading === "Continue Watching" ? 3.4 : 5,
           slidesToScroll: data.heading === "Continue Watching" ? 3.4 : 5,
         
         },
@@ -104,7 +178,7 @@ console.log(cardId)
       {
         breakpoint: 900,
         settings: {
-          slidesToShow: 4,
+          slidesPerView: 4,
           slidesToScroll: 4,
        
         },
@@ -112,7 +186,7 @@ console.log(cardId)
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 3.4,
+          slidesPerView: 3.4,
       
           
         },
@@ -120,7 +194,7 @@ console.log(cardId)
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2.8,
+          slidesPerView: 2.8,
           speed: 0,
           
         },
@@ -128,7 +202,7 @@ console.log(cardId)
       {
         breakpoint: 380,
         settings: {
-          slidesToShow: 2.5,
+          slidesPerView: 2.5,
           speed: 0,
           
         },
@@ -183,23 +257,89 @@ console.log(cardId)
         </div>
         ):null}
       </div>
-      {data.heading == "Continue Watching" ? (
 
-<Slider {...settings}  ref={sliderRef} className="slidecard watchcard" >
-{data?.Data?.map((item: any, index) => (
-  <div className="ml-2" key={index} onClick={() => router.push(`/${item.media_type}/${item.id}`)}>
-   
-      <ContinueWatchingCard  {...item} heading={data.heading}  />
-  
-  
-  </div>
-  
-))}
-</Slider>
+
+      <div className=" w-full flex justify-between items-center mt-5">
+            <span className={` px-2 flex  $ font-semibold items-end  text-2xl`}>
+              {/* {heading} */}
+            </span>
+
+            <div className="flex items-center gap-[2px] mx-1 p-2.5">
+              <button className="   " id={`swiper-back-${data.swiperId}`}>
+                <FaChevronLeft  width={24} />
+              </button>
+              <button className="     " id={`swiper-forward-${data.swiperId}`}>
+                <FaChevronRight  width={24} />
+              </button>
+            </div>
+          </div>
+
+      {data.heading == "Continue Watching" ? (
+        <Swiper
+        ref={sliderRef} className="slidecard watchcard" 
+        grabCursor={true}
+        speed={900}
+        slidesPerView={6} // Display 4 slides at once
+        spaceBetween={2} // Add space between slides
+        navigation={{
+          nextEl: `#swiper-forward-${data.swiperId}`,
+          prevEl: `#swiper-back-${data.swiperId}`,
+        }}
+        breakpoints={breakpoints}
+        mousewheel={true}
+        initialSlide={1}
+          style={{ paddingBlock: "0rem" }}
+        className="sw"
+        // onSlideChange={handleSlideChange}
+      >
+          {data?.Data?.map((item: any, index) => (
+            <SwiperSlide key={item} className=" max-h-[500px]"
+            onClick={() => router.push(`/${item.media_type}/${item.id}`)}>
+           
+           <ContinueWatchingCard  {...item} heading={data.heading}  />
+          
+          
+         
+           
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+
       ):(
-        <Slider {...settings}  ref={sliderRef} className="slidecard">
-        {data?.Data?.map((item: any, index) => (
-          <div key={index} onClick={() => {
+      //   <Slider {...settings}  ref={sliderRef} className="slidecard">
+      //   {data?.Data?.map((item: any, index) => (
+      //     <div key={index} onClick={() => {
+      //       setCardId(item.id);
+      //       setSelected(!selected)
+      //     }}>
+           
+      //         <HomeCard  {...item} heading={data.heading}  />
+          
+          
+      //     </div>
+          
+      //   ))}
+      // </Slider>
+      <Swiper
+        grabCursor={true}
+        ref={sliderRef} className="slidecard"
+        speed={900}
+        slidesPerView={6} // Display 4 slides at once
+        spaceBetween={2} // Add space between slides
+        breakpoints={breakpoints}
+        navigation={{
+          nextEl: `#swiper-forward-${data.swiperId}`,
+          prevEl: `#swiper-back-${data.swiperId}`,
+        }}
+        mousewheel={true}
+        initialSlide={1}
+          style={{ paddingBlock: "0rem" }}
+        // onSlideChange={handleSlideChange}
+      >
+          {data?.Data?.map((item: any, index) => (
+            <SwiperSlide key={item} className=" max-h-[500px]"
+      onClick={() => {
             setCardId(item.id);
             setSelected(!selected)
           }}>
@@ -207,10 +347,11 @@ console.log(cardId)
               <HomeCard  {...item} heading={data.heading}  />
           
           
-          </div>
-          
+         
+           
+          </SwiperSlide>
         ))}
-      </Slider>
+      </Swiper>
       )}
      
     </div> </>

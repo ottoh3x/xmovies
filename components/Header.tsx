@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { addToMyList, removeFromList } from "../redux/actions/myListAction";
 import Link from "next/link";
 
+
 function timeConvert(n: any) {
   var num = n;
   var hours = num / 60;
@@ -46,6 +47,7 @@ function Header(props: HeaderProps) {
 console.log(MyList)
   return (
     <>
+    
       <Slider {...settings} className=" overflow-hidden">
         {props.Data?.map((item: any) => {
           const current = MyList.filter((item: any) => item.id === item?.id);

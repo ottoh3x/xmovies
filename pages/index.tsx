@@ -120,6 +120,7 @@ const DramaShows = async () => {
 <HomeContainer Data={sortedList} heading="Continue Watching" />
 
       <HomeContainer
+      swiperId={1}
         Data={trendingMovies}
         setTypeMovies={() => setFetchTrendingType("movie")}
         setTypeTV={() => setFetchTrendingType("tv")}
@@ -129,8 +130,9 @@ const DramaShows = async () => {
             : "Trending Shows"
         }
       />
-      <HomeContainer Data={dramaShows} heading="Drama Shows" />
+      <HomeContainer swiperId={2} Data={dramaShows} heading="Drama Shows" />
       <HomeContainer
+      swiperId={3}
         Data={popularMovies}
         setTypeMovies={() => setFetchPopularType("movie")}
         setTypeTV={() => setFetchPopularType("tv")}
@@ -139,21 +141,21 @@ const DramaShows = async () => {
         : "Popular Shows"
     }
       />
-      <HomeContainer Data={topRated} setTypeMovies={() => setFetchRatedType("movie")}
+      <HomeContainer swiperId={4} Data={topRated} setTypeMovies={() => setFetchRatedType("movie")}
         setTypeTV={() => setFetchRatedType("tv")}
         heading={fetchRatedType === "movie"
         ? `Top Rated Movies`
         : "Top Rated Shows"
     } />
-    <HomeContainer Data={comedyShows} setTypeMovies={() => setFetchComedyType("movie")}
+    <HomeContainer swiperId={5} Data={comedyShows} setTypeMovies={() => setFetchComedyType("movie")}
         setTypeTV={() => setFetchComedyType("tv")}
         heading={fetchComedyType === "movie"
         ? `Comedy Movies`
         : "Comedy Shows"
     } />
-      <HomeContainer Data={latestMovies} heading="Upcoming Movies" />
-      <HomeContainer Data={animeShows} heading="Anime Shows" />
-      <HomeContainer Data={animeMovies} heading="Anime Movies" />
+      <HomeContainer swiperId={6} Data={latestMovies} heading="Upcoming Movies" />
+      <HomeContainer swiperId={7} Data={animeShows} heading="Anime Shows" />
+      <HomeContainer swiperId={8} Data={animeMovies} heading="Anime Movies" />
 
 
       </div>

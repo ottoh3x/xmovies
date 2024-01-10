@@ -27,7 +27,7 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
     "slick-carousel": "^1.8.1",
-    "swiper": "^8.4.2",
+    "swiper": "^11.0.5",
     "use-sse": "^2.0.1"
   },
   "devDependencies": {
