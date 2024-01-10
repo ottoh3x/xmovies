@@ -209,7 +209,7 @@ console.log(resp)
             ></iframe>
             {/* <EnimePlayer subtitles={subtitles()} src={"https://ottocors.vercel.app/cors?url=https://tc-1.dayimage.net/_v6/380ccc6aa21d4e175c3ebbf36eb393af084ce3306d32c57b77f505d8efa16912eae144c75c5ade7b13650b17dcf40835ef450fe3ee65a3e131368f85213a25a32c278706ad24a408390dd213c35d9a6782294bd8e1b9751f2d95fec0ad3045054c047845049a3843204568183c0a93366fb074a9d9cb60b776336e9e525dddde/master.m3u8"} poster="" title={data?.title}/> */}
 
-            <HomeContainer Data={casts} heading="Casts" />
+            <HomeContainer swiperId={1} Data={casts} heading="Casts" />
 
             <Container
               Data={recommended}

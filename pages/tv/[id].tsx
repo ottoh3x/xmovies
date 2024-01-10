@@ -295,7 +295,7 @@ function TvEpisode(res: any) {
 
           </div>
 
-          <HomeContainer Data={casts} heading="Casts" />
+          <HomeContainer swiperId={0} Data={casts} heading="Casts" />
 
           <Container
             Data={recommended}

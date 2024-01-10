@@ -75,7 +75,7 @@ function HomeContainer(data: HomeContainerProps):any {
     setSelected(false);
   };
 
-  const breakpoints = [
+  const breakpoints :any = [
     {
       1600: {
         settings: {
@@ -289,7 +289,6 @@ console.log(cardId)
         mousewheel={true}
         initialSlide={1}
           style={{ paddingBlock: "0rem" }}
-        className="sw"
         // onSlideChange={handleSlideChange}
       >
           {data?.Data?.map((item: any, index) => (
