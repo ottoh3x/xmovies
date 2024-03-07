@@ -11,7 +11,7 @@ import Header from "../components/Header";
 
 export const getServerSideProps: GetServerSideProps = async () => {
 
-  let url = `https://api.themoviedb.org/4/discover/movie?vote_average.gte=7.8&with_original_language=en&without_genres=16&api_key=cfe422613b250f702980a3bbf9e90716`;
+  let url = `https://api.themoviedb.org/3/discover/movie?vote_average.gte=7.8&with_original_language=en&without_genres=16&api_key=cfe422613b250f702980a3bbf9e90716`;
   let req = await fetch(url);
   let res = await req.json();
 

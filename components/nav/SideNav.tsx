@@ -182,7 +182,7 @@ const handleMovieCategory = (e:any) => {
              
             </div>
           </div>
-          <div className="absolute bottom-0 right-0 left-0 flex justify-center mb-2 pb-2 border-t-[2px] border-[#22222278]">
+          {/* <div className="absolute bottom-0 right-0 left-0 flex justify-center mb-2 pb-2 border-t-[2px] border-[#22222278]">
             <a
               href="https://www.buymeacoffee.com/ottoprogrammer"
               rel="noreferrer"
@@ -190,7 +190,7 @@ const handleMovieCategory = (e:any) => {
             >
               <img src="/coffe1.svg" className="pt-[1rem] cursor-pointer" />
             </a>
-          </div>
+          </div> */}
         </div>
       </motion.div>
     </Backdrop>

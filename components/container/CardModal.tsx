@@ -170,6 +170,7 @@ function CardModal(card: CardModalProps) {
             damping: 15,
           },
         }}
+        style={{zoom:""}}
         exit={{ y: "100vh" }}
         ref={cardRef}
         className="w-full max-w-[700px] 2xl:max-w-[800px] bg-[#060606] h-full mx-auto shadow-2xl mt-[9rem] overflow-y-scroll scroll-smooth	 cursor-default my-12"

@@ -96,22 +96,21 @@ html,body {
     opacity: 0 !important;
 }
 
-#next {
+.next {
   opacity:0;
-  height:320px;
 }
-#prev {
+.prev {
   opacity:0;
-  height:320px;
-  margin-left:auto
 
 }
 
-.slick-slider:hover #next{
+.slidecard:hover .next{
   opacity:1 !important;
+  transition: all 500ms ease-in-out;
 }
-.slick-slider:hover #prev{
+.slidecard:hover .prev{
   opacity:1 !important;
+  transition: all 500ms ease-in-out;
 }
 /* .slick-slide.slick-active.slick-current {
     position: absolute !important;
