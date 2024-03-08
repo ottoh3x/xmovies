@@ -129,7 +129,9 @@ function TvEpisode(res: any) {
               <iframe
                 onLoadCapture={handleIframe}
                 className=" w-full h-[300px] lg:h-[750px] mx-auto "
-                src={`https://vidsrc.to/embed/tv/${id}/${dataState?.season}/${dataState?.ep_num}`}
+                src={`https://vidsrc.cc/v2/embed/tv/${id}/${dataState?.season}/${dataState?.ep_num}`}
+
+                // src={`https://vidsrc.to/embed/tv/${id}/${dataState?.season}/${dataState?.ep_num}`}
                 allowFullScreen
               ></iframe>
               <div className="flex gap-1 p-1.5 justify-end">
