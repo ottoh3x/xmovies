@@ -24,6 +24,8 @@ export const currentEpisode = (state = 1,action:any) => {
             return state
     }
 }
+
+
 export const continueWatchingReducer = (state = [],action:any) => {
     switch(action.type) {
         case MyActions.SETCONTINUEWATCHING:

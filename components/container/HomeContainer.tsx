@@ -102,15 +102,15 @@ function HomeContainer(data: HomeContainerProps): any {
   const breakpoints = () => {
     return {
       300: {
-        slidesPerView: data.heading === "Continue Watching" ? 1.5 : 2.5,
-        spaceBetween: 5,
+        slidesPerView: data.heading === "Continue Watching" ? 1.5 : data.heading === "Casts" ? 2.5 : 2.5,
+        spaceBetween: 10,
       },
       480: {
-        slidesPerView: data.heading === "Continue Watching" ? 2 : 3.5,
+        slidesPerView: data.heading === "Continue Watching" ? 2 : data.heading === "Casts" ? 3.3 : 3.5,
         spaceBetween: 10,
       },
       640: {
-        slidesPerView: data.heading === "Continue Watching" ?2 : 4.2,
+        slidesPerView: data.heading === "Continue Watching" ? 2 : data.heading === "Casts" ? 3.7 : 4.2,
         spaceBetween: 10,
         speed: 500,
       },
@@ -138,106 +138,32 @@ function HomeContainer(data: HomeContainerProps): any {
         speed: 500,
       },
       1624: {
-        slidesPerView: data.heading === "Continue Watching" ? 7 : 7,
+        slidesPerView: data.heading === "Continue Watching" ? 5.5 : 7,
         slidesPerGroup: 3,
         spaceBetween: 10,
         speed: 500,
       },
       1800: {
-        slidesPerView: data.heading === "Continue Watching" ? 8.7 : 8.7,
+        slidesPerView: data.heading === "Continue Watching" ? 6.2 : 8.7,
         slidesPerGroup: 3,
         spaceBetween: 10,
         speed: 500,
       },
       2030: {
-        slidesPerView: data.heading === "Continue Watching" ? 9.1 : 9.1,
+        slidesPerView: data.heading === "Continue Watching" ? 7 : 9.1,
         slidesPerGroup: 3,
         spaceBetween: 10,
         speed: 500,
       },
       2450: {
-        slidesPerView: data.heading === "Continue Watching" ? 10.5 : 10.5,
+        slidesPerView: data.heading === "Continue Watching" ? 7.5 : 10.5,
         slidesPerGroup: 3,
         spaceBetween: 10,
         speed: 500,
       },
     };
   };
-  console.log(cardId);
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 700,
-    centerPadding: "70px",
-    slidesPerView:
-      data.heading === "Continue Watching"
-        ? 5.6
-        : data.heading === "Casts"
-        ? 7
-        : 8,
-    slidesToScroll:
-      data.heading === "Continue Watching"
-        ? 5.6
-        : data.heading === "Casts"
-        ? 7
-        : 8,
-    initialSlide: 0,
-    beforeChange: beforeChange,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
 
-    responsive: [
-      {
-        breakpoint: 1600,
-        settings: {
-          slidesPerView: data.heading === "Continue Watching" ? 4.2 : 6,
-          slidesToScroll: data.heading === "Continue Watching" ? 4.2 : 6,
-          initialSlide: 0,
-        },
-      },
-      {
-        breakpoint: 1400,
-        settings: {
-          slidesPerView: data.heading === "Continue Watching" ? 4 : 6,
-          slidesToScroll: data.heading === "Continue Watching" ? 4 : 6,
-        },
-      },
-      {
-        breakpoint: 1240,
-        settings: {
-          slidesPerView: data.heading === "Continue Watching" ? 3.4 : 5,
-          slidesToScroll: data.heading === "Continue Watching" ? 3.4 : 5,
-        },
-      },
-      {
-        breakpoint: 900,
-        settings: {
-          slidesPerView: 4,
-          slidesToScroll: 4,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesPerView: 3.4,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesPerView: 2.8,
-          speed: 0,
-        },
-      },
-      {
-        breakpoint: 380,
-        settings: {
-          slidesPerView: 2.5,
-          speed: 0,
-        },
-      },
-    ],
-  };
   return (
     data?.Data?.length > 0 && (
       <>
@@ -251,7 +177,7 @@ function HomeContainer(data: HomeContainerProps): any {
             />
           )}
         </AnimatePresence>
-        <div className="w-full relative overflow-hidden lg:px-6">
+        <div className="w-full relative overflow-hidden px-1 lg:px-6 my-4">
           <div className="p-2 flex justify-between items-center">
             <h1 className="text-lg lg:text-2xl lg:font-bold ">
               {data.heading}
@@ -321,13 +247,11 @@ function HomeContainer(data: HomeContainerProps): any {
                 prevEl: `#swiper-back-${data.swiperId}`,
               }}
               breakpoints={breakpoints()}
-              mousewheel={true}
+        
               pagination={{
                 clickable: true,
               }}
-              modules={[Grid, Navigation]}
-              initialSlide={1}
-              style={{ paddingBlock: "0rem" }}
+              modules={[Navigation]}
               // onSlideChange={handleSlideChange}
             >
               {data?.Data?.map((item: any, index) => (
@@ -368,19 +292,15 @@ function HomeContainer(data: HomeContainerProps): any {
               }}
               spaceBetween={10}
               slidesPerView={2}
-            slidesPerGroupSkip={1}
-              grid={{
-                rows: 2,
-                fill: "row",
-              }}
-              modules={[Grid, Navigation]}
+              
+              modules={[Navigation]}
               // onSlideChange={handleSlideChange}
             >
-              <div className="flex items-center justify-between absolute inset-0 max-h-[320px] ">
-              <button className="prev absolute left-0 z-50 bg-black/90 hover:bg-neutral-900/90 w-10 flex items-center justify-center  h-full" id={`swiper-back-${data.swiperId}`}>
+              <div className="flex items-center justify-between absolute inset-0 max-h-[200px] lg:max-h-[320px] ">
+              <button className="prev absolute left-0 z-50  w-10 flex items-center justify-center  h-full" id={`swiper-back-${data.swiperId}`}>
                 <FaChevronLeft width={32} />
               </button>
-              <button className="next z-50 bg-black/90 hover:bg-neutral-900/90 absolute right-0 w-10 flex items-center justify-center  h-full"  id={`swiper-forward-${data.swiperId}`}>
+              <button className="next z-50  absolute right-0 w-10 flex items-center justify-center  h-full"  id={`swiper-forward-${data.swiperId}`}>
                 <FaChevronRight width={32} />
               </button>
             </div>

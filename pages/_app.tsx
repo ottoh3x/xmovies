@@ -8,6 +8,7 @@ import Footer from "../components/footer/Footer";
 import SideNav from "../components/nav/SideNav";
 import {useState} from "react"
 import { AnimatePresence } from "framer-motion";
+import { ToastContainer, toast, Flip } from "react-toastify";
 
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -28,6 +29,17 @@ function MyApp({ Component, pageProps }: AppProps) {
       
       <div className="bg-[#111] text-white  mx-auto   ">
         <Component {...pageProps} />{" "}
+        <ToastContainer
+          position={"top-left"}
+          // onClick={() =>
+          //   router.push(`/watching/${resumeId.anime_id}/${resumeId.episode}`)
+          // }
+
+          autoClose={5000}
+          transition={Flip}
+          draggablePercent={30}
+          theme="colored"
+        />
       </div>
       <Footer />
       </PersistGate>

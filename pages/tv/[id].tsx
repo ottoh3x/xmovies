@@ -16,6 +16,7 @@ import {
 } from "../../redux/actions/tvShowAction";
 import { AnimatePresence, motion } from "framer-motion";
 import { currentEpisode } from "../../redux/reducers/tvShowReducer";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 const DetailContainer = dynamic(
   () => import("../../components/details/DetailContainer")
 );
@@ -54,7 +55,7 @@ function TvEpisode(res: any) {
     }
   });
 
-  console.log(currentEpisode)
+  console.log(currentEpisode);
   useEffect(() => {
     const ce = setCurrentSeason(dataState.season);
 
@@ -118,183 +119,216 @@ function TvEpisode(res: any) {
     <>
       <div className="w-full	relative mx-auto ">
         <DetailContainer {...data} media_type="tv" />
-        <div className="max-w-[1720px] mx-auto">
+        <div className="px-1 lg:px-6 mx-auto">
           <div>
             <div className="flex flex-col ">
               <div className="flex">
+                <div className="w-full">
+                  <iframe
+                    onLoadCapture={handleIframe}
+                    className=" w-full h-[300px] lg:h-[750px] mx-auto "
+                    src={`https://vidsrc.cc/v2/embed/tv/${id}/${dataState?.season}/${dataState?.ep_num}`}
+                    // src={`https://vidsrc.to/embed/tv/${id}/${dataState?.season}/${dataState?.ep_num}`}
+                    allowFullScreen
+                  ></iframe>
+                  <div className="flex gap-1 p-1.5 justify-end">
+                    {dataState.ep_num > 1 && (
 
+                    <button
+                     onClick={() => {
 
-              <div className="w-full">
-                
-              <iframe
-                onLoadCapture={handleIframe}
-                className=" w-full h-[300px] lg:h-[750px] mx-auto "
-                src={`https://vidsrc.cc/v2/embed/tv/${id}/${dataState?.season}/${dataState?.ep_num}`}
-
-                // src={`https://vidsrc.to/embed/tv/${id}/${dataState?.season}/${dataState?.ep_num}`}
-                allowFullScreen
-              ></iframe>
-              <div className="flex gap-1 p-1.5 justify-end">
-
-                <button onClick={() => SetCurrentEpisode(parseInt(dataState?.ep_num) - 1)} className="px-5 py-1 bg-neutral-800 hover:bg-[#4815ff] rounded-full">
-                  Previous
-                </button>
-              <button className="px-5 py-1 bg-neutral-800 hover:bg-[#4815ff] rounded-full">
-                  Next
-                </button>
-              </div>
-              </div>
-
-<div className="flex flex-col max-h-[750px] w-full  max-w-[500px]  overflow-y-scroll gap-2 ">
-              <AnimatePresence>
-                {showSeasons && (
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{
-                      scale: 1,
-                      type: "spring",
-                      transition: { duration: 0.1 },
-                    }}
-                    exit={{
-                      scale: 0,
-                      transition: { duration: 0.2 },
-                    }}
-                    className={`grid grid-cols-3 md:grid-cols-4 lg:grid-cols-3   gap-2  mx-2 transition-all`}
-                  >
-                    {data?.seasons
-                      ?.filter((f: any) => f.name !== "Specials")
-                      .map((s: any) => {
-                        return (
-                          s.air_date != null && (
-                            <div
-                              className={`${
-                                s.season_number === dataState?.season
-                                  ? " "
-                                  : "bg-neutral-900"
-                              }  cursor-pointer  text-center overflow-hidden text-ellipsis whitespace-nowrap	 rounded-md    transition-all`}
-                              key={s.season_number}
-                              onClick={() => {
-                                setCurrentSeason(s.season_number);
-                              }}
-                            >
-                              <img
-                                src={
-                                  `https://image.tmdb.org/t/p/original//${s?.poster_path}` ||
-                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png"
-                                }
-                                className="max-h-[340px] w-full object-cover"
-                              />
-
-                              {/* <h1 className="p-2">{s.name}</h1> */}
-                            </div>
-                          )
-                        );
-                      })}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-              </div>
-
-
-              <div className="p-1">
-                <h1 className="p-2">Episodes:</h1>
-
-
-              <div className=" grid grid-cols-6 gap-1 w-full overflow-y-scroll lg:max-w-">
-                {sEpisodes?.map((ep: any) => (
-                  <div
-                    key={ep.episode_number}
-                    onClick={() => {
+                      const filterEp = sEpisodes.filter((t) => t.episode_number === parseInt(dataState.ep_num) -   1 )[0]
                       dispatch(
                         SetCurrentState({
                           id: id,
-                          episode_number: ep.episode_number,
-                          episode_name: ep.name,
-                          season_number: ep.season_number,
-                          episode_image: ep.still_path,
+                          episode_number: parseInt(dataState.ep_num) - 1,
+                          episode_name: filterEp.name,
+                          season_number: filterEp.season_number,
+                          episode_image: filterEp.still_path,
                         })
                       );
                     }}
-                  >
-<div className="">
-                <img
-                  className="flex-shrink-0 w-full h-[170px] rounded-sm object-cover"
-                  src={`https://www.themoviedb.org/t/p/original${ep.still_path}`}
-                  // src="https://i.imgur.com/Xj42miJg.jpg"
-                  alt={ep.title}
-                />
-                {/* <small className="bg-neutral-900/80 font-black py-0.5 px-1.5 absolute top-0 left-0 rounded-br-lg">
+                      className="px-5 py-2 bg-neutral-800 hover:bg-[#4815ff] rounded-l-full flex items-center gap-3"
+                    >
+                      <span><FaChevronLeft /></span>
+                      Prev Ep
+                    </button>
+                    )}
+
+{dataState.ep_num < sEpisodes?.length && (
+  <button 
+                    onClick={() => {
+
+                      const filterEp = sEpisodes.filter((t) => t.episode_number === parseInt(dataState.ep_num) + 1)[0]
+                      dispatch(
+                        SetCurrentState({
+                          id: id,
+                          episode_number: parseInt(dataState.ep_num) + 1,
+                          episode_name: filterEp.name,
+                          season_number: filterEp.season_number,
+                          episode_image: filterEp.still_path,
+                        })
+                      );
+                    }}
+                     className="px-5 py-2 bg-neutral-800 hover:bg-[#4815ff] rounded-r-full flex items-center gap-3">
+                      Next Ep
+                      <span>
+                        <FaChevronRight />
+                      </span>
+                    </button>
+) }
+                    
+                  </div>
+                </div>
+
+                
+              </div>
+
+              <div className="p-1">
+              <div
+                onClick={() => {
+                  setShowSeasons(!showSeasons);
+                  setIsOpen(!isOpen);
+                }}
+                className="bg-stone-900 mt-6  w-fit rounded-sm  my-3 font-semibold text-center cursor-pointer p-3 flex  justify-between  gap-10 items-center hover:bg-neutral-900"
+              >
+                Seasons
+                <span>
+                  {showSeasons ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2.5}
+                      stroke="currentColor"
+                      className="w-4 h-4"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4.5 15.75l7.5-7.5 7.5 7.5"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2.5}
+                      stroke="currentColor"
+                      className="w-4 h-4"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                      />
+                    </svg>
+                  )}
+                </span>
+              </div>
+              <div className="flex flex-col  w-full   overflow-y-scroll gap-2 ">
+                  <AnimatePresence>
+                    {showSeasons && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{
+                          opacity: 1,
+                          type: "spring",
+                          transition: { duration: 0.3 },
+                        }}
+                        exit={{
+                          opacity: 0,
+                          transition: { duration: 0.3 },
+                        }}
+                        className={`flex flex-wrap   gap-2  mx-2 transition-all`}
+                      >
+                        {data?.seasons
+                          ?.filter((f: any) => f.name !== "Specials")
+                          .map((s: any) => {
+                            return (
+                              s.air_date != null && (
+                                <div
+                                  className={`${
+                                    s.season_number === dataState?.season
+                                      ? "bg-[#4815ff]"
+                                      : "bg-neutral-900"
+                                  }  cursor-pointer  text-center hover:bg-[#4815ff] overflow-hidden text-ellipsis whitespace-nowrap	 rounded-md    transition-all`}
+                                  key={s.season_number}
+                                  onClick={() => {
+                                    setCurrentSeason(s.season_number);
+                                  }}
+                                >
+                                  <img
+                                    src={
+                                      `https://image.tmdb.org/t/p/original//${s?.poster_path}` ||
+                                      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png"
+                                    }
+                                    className="max-h-[200px] lg:max-h-[240px] w-full object-cover"
+                                  />
+
+                                  <h1 className="p-2">{s.name}</h1>
+                                </div>
+                              )
+                            );
+                          })}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+                <h1 className="py-3 text-xl font-medium">Episodes:</h1>
+
+                <div className=" grid grid-cols-1 lg:grid-cols-6 gap-1 w-full overflow-y-scroll lg:max-w-">
+                  {sEpisodes?.map((ep: any) => (
+                    <div
+                      key={ep.episode_number}
+                      onClick={() => {
+                        dispatch(
+                          SetCurrentState({
+                            id: id,
+                            episode_number: ep.episode_number,
+                            episode_name: ep.name,
+                            season_number: ep.season_number,
+                            episode_image: ep.still_path,
+                          })
+                        );
+                      }}
+                    >
+                      <div className="">
+                        {/* <img
+                          className="flex-shrink-0 w-full h-[170px] rounded-sm object-cover"
+                          src={`https://www.themoviedb.org/t/p/original${ep.still_path}`}
+                          // src="https://i.imgur.com/Xj42miJg.jpg"
+                          alt={ep.title}
+                        /> */}
+                        {/* <small className="bg-neutral-900/80 font-black py-0.5 px-1.5 absolute top-0 left-0 rounded-br-lg">
                   {ep.episode_number}
                 </small> */}
-                {/* <small className=" font-lighter p-0.5 ">
+                        {/* <small className=" font-lighter p-0.5 ">
                   {ep.name || "Episode " + ep.episode_number}
                 </small> */}
-              </div>
+                      </div>
 
-                    <h1
-                      style={{ color: "white" }}
-                      className={`${
-                        ep.episode_number === dataState?.ep_num &&
-                        ep.season_number === dataState?.season
-                          ? "bg-[#4815ff]"
-                          : "bg-neutral-900"
-                      } drop-shadow-xl p-3 overflow-hidden text-ellipsis	whitespace-nowrap	 transition-all font-semibold  cursor-pointer hover:bg-[#4815ff]`}
-                    >
-                      Ep {ep.episode_number}:{" "}
-                      <span className="font-light text-gray-300 italic">
-                        {ep.name}
-                      </span>
-                    </h1>
-                  </div>
-                ))}
+                      <h1
+                        style={{ color: "white" }}
+                        className={`${
+                          ep.episode_number === dataState?.ep_num &&
+                          ep.season_number === dataState?.season
+                            ? "bg-[#4815ff]"
+                            : "bg-neutral-900"
+                        } drop-shadow-xl p-3 overflow-hidden text-ellipsis	whitespace-nowrap	 transition-all font-semibold  cursor-pointer hover:bg-[#4815ff]`}
+                      >
+                        Ep {ep.episode_number}:{" "}
+                        <span className="font-light text-gray-300 italic">
+                          {ep.name}
+                        </span>
+                      </h1>
+                    </div>
+                  ))}
+                </div>
               </div>
-              </div>
-            <div
-              onClick={() => {
-                setShowSeasons(!showSeasons);
-                setIsOpen(!isOpen);
-              }}
-              className="bg-stone-900 mt-6  w-[120px] rounded-sm ml-2  font-semibold text-center cursor-pointer p-3 flex flex-col justify-between items-center hover:bg-neutral-900"
-            >
-              Seasons
-              <span>
-                {showSeasons ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2.5}
-                    stroke="currentColor"
-                    className="w-4 h-4"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 15.75l7.5-7.5 7.5 7.5"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2.5}
-                    stroke="currentColor"
-                    className="w-4 h-4"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                    />
-                  </svg>
-                )}
-              </span>
+              
             </div>
-            
-            </div>
-
           </div>
 
           <HomeContainer swiperId={0} Data={casts} heading="Casts" />
@@ -309,9 +343,6 @@ function TvEpisode(res: any) {
     </>
   );
 }
-
-
-
 
 // TvEpisode.getInitialProps = async (context:any) => {
 //   let id = context.params.id;
@@ -331,11 +362,9 @@ function TvEpisode(res: any) {
 //   return { props: { res } };
 // };
 
-
 export async function getStaticPaths() {
   return { paths: [], fallback: "blocking" };
 }
-
 
 export const getStaticProps = async (context: any) => {
   let id = context.params.id;
@@ -345,6 +374,5 @@ export const getStaticProps = async (context: any) => {
 
   return { props: { res } };
 };
-
 
 export default TvEpisode;

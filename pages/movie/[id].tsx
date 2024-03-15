@@ -195,7 +195,7 @@ console.log(resp)
   console.log(MyList);
   return (
     <>
-      <div className="w-full relative mx-auto">
+      <div className="w-full relative mx-auto ">
             <DetailContainer {...data} media_type="movie"/>
         <div className="gap-4">
           

@@ -44,10 +44,11 @@ function ContinueWatchingCard(movie:ContinueWatchingCardProps) {
         boxShadow:
           "black 0px 11px 0px -10px inset, #111 0px -68px 50px -10px inset",
       }}
+      className='hover:-translate-y-[1px] transform transition-all duration-500'
     >
       {" "}
-      <span className="h-full flex items-center justify-center brightness-75">
-        <BsPlayCircle size={50} color="white" />
+      <span className="h-full flex items-center justify-center text-white hover:text-red-600">
+        <BsPlayCircle size={50} />
       </span>
     </div>
     

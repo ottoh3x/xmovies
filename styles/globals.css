@@ -96,11 +96,21 @@ html,body {
     opacity: 0 !important;
 }
 
+
 .next {
   opacity:0;
+  background-color: rgba(0, 0, 0, 0.747);
+
 }
+
+.swiper-button-disabled {
+  color: rgba(255, 255, 255, 0.39);
+  background: rgba(0, 0, 0, 0.24) !important;
+}
+
 .prev {
   opacity:0;
+  background-color: rgba(0, 0, 0, 0.76);
 
 }
 
