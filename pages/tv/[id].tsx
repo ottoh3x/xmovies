@@ -137,7 +137,7 @@ function TvEpisode(res: any) {
                     <button
                      onClick={() => {
 
-                      const filterEp = sEpisodes.filter((t) => t.episode_number === parseInt(dataState.ep_num) -   1 )[0]
+                      const filterEp = sEpisodes.filter((t:any) => t.episode_number === parseInt(dataState.ep_num) -   1 )[0]
                       dispatch(
                         SetCurrentState({
                           id: id,
@@ -159,7 +159,7 @@ function TvEpisode(res: any) {
   <button 
                     onClick={() => {
 
-                      const filterEp = sEpisodes.filter((t) => t.episode_number === parseInt(dataState.ep_num) + 1)[0]
+                      const filterEp = sEpisodes.filter((t:any) => t.episode_number === parseInt(dataState.ep_num) + 1)[0]
                       dispatch(
                         SetCurrentState({
                           id: id,
