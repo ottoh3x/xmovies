@@ -12,6 +12,8 @@ import Container from "./Container";
 import Card from "./Card";
 import SimilarCard from "./SimilarCard";
 import ReactPlayer from "react-player/lazy";
+import { toast } from "react-toastify";
+import Msg from "../Msg";
 
 function timeConvert(n: any) {
   var num = n;
@@ -131,10 +133,13 @@ function CardModal(card: CardModalProps) {
     if (click) {
       dispatch(removeFromList(data.id));
       setClick(false);
-      setNotification(true);
-      setTimeout(() => {
-        setNotification(false);
-      }, 4000);
+      toast.error(
+        <Msg
+          title={data?.title }
+          message="Was Removed from your List"
+        />,
+        { theme: "dark" }
+      );
     } else {
       dispatch(
         addToMyList({
@@ -147,10 +152,13 @@ function CardModal(card: CardModalProps) {
         }),
       );
       setClick(true);
-      setNotification(true);
-      setTimeout(() => {
-        setNotification(false);
-      }, 4000);
+      toast.success(
+        <Msg
+          title={data?.title }
+          message="Was Added To Your List"
+        />,
+        { theme: "dark" }
+      );
     }
   };
 
@@ -366,36 +374,7 @@ function CardModal(card: CardModalProps) {
           </div>
         </motion.div>
       </motion.div>
-      <AnimatePresence>
-        {notification && (
-          <motion.div
-            initial={{ y: "-100vh", scale: 0 }}
-            animate={{
-              y: 0,
-              scale: 1,
-              transition: { duration: 0.2, type: "spring", stiffness: 130 },
-            }}
-            exit={{
-              
-              x: "100vh",
-              transition: { duration: 0.4 },
-            }}
-            className="fixed right-1 bottom-1 bg-gray-300 rounded-lg border-l-[5px] border-neutral-900 text-stone-900 p-4 drop-shadow-2xl z-50"
-          >
-            {click ? (
-              <h1 className="font-bold px-2 flex items-center gap-3">
-                <AiOutlineCheck color="green" size={20} strokeWidth={3} />{" "}
-                <span>{data.title || data.name} Was Added To My List</span>
-              </h1>
-            ) : (
-              <h1 className="font-bold px-2 flex items-center gap-3">
-                <AiOutlineClose size={20} color="red" strokeWidth={3} />{" "}
-                <span>{data.title || data.name} Was Removed From My List</span>
-              </h1>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      
     </Backdrop>
   );
 }

@@ -7,6 +7,8 @@ import Link from "next/link";
 import Trailer from "../Trailer";
 import { AiFillYoutube, AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { IoMdRemove, IoMdAdd } from "react-icons/io";
+import { Flip, ToastContainer, toast } from "react-toastify";
+import Msg from "../Msg";
 
 function timeConvert(n: any) {
   var num = n;
@@ -45,7 +47,6 @@ function DetailContainer(data: DetailContainerProps) {
   const { MyList } = useSelector((state: any) => state);
   const router = useRouter();
   const { id } = router.query;
-  const [notification, setNotification] = useState(false);
   const [isTrailer, setIsTrailer] = useState(false);
   const [trailer, setTrailer] = useState<any>("");
 
@@ -83,20 +84,27 @@ function DetailContainer(data: DetailContainerProps) {
         }),
       );
       setClick(true);
-      setNotification(true);
-      setTimeout(() => {
-        setNotification(false);
-      }, 4000);
+
+      toast.success(
+        <Msg
+          title={data?.title }
+          message="Was Added To Your List"
+        />,
+        { theme: "dark" }
+      );
+      
     } else {
       dispatch(removeFromList(data?.id));
       setClick(false);
-      setNotification(true);
-      setTimeout(() => {
-        setNotification(false);
-      }, 4000);
-    }
+      toast.error(
+        <Msg
+          title={data?.title }
+          message="Was Removed from your List"
+        />,
+        { theme: "dark" }
+      );
   };
-
+  }
   return (
     <>
       <div className="flex gap-4 drop-shadow-2xl">
@@ -237,37 +245,9 @@ function DetailContainer(data: DetailContainerProps) {
             </div>
           </motion.div>
         </div>
-        <AnimatePresence>
-        {notification && (
-          <motion.div
-            initial={{ y: "100vh", scale: 0 }}
-            animate={{
-              y: 0,
-              scale: 1,
-              transition: { duration: 0.1, type: "spring", stiffness: 130 },
-            }}
-            exit={{
-              
-              x: "100vh",
-              transition: { duration: 0.2 },
-            }}
-            className="fixed right-1 bottom-1 bg-gray-300 rounded-lg border-l-[5px] border-neutral-900  text-stone-900 p-4 drop-shadow-2xl z-50"
-          >
-            {click ? (
-              <h1 className="font-bold px-2 flex items-center gap-3">
-                <AiOutlineCheck color="green" size={20} strokeWidth={3} />{" "}
-                <span>{data.title || data.name} Was Added To My List</span>
-              </h1>
-            ) : (
-              <h1 className="font-bold px-2 flex items-center gap-3">
-                <AiOutlineClose size={20} color="red" strokeWidth={3} />{" "}
-                <span>{data.title || data.name} Was Removed From My List</span>
-              </h1>
-            )}
-          </motion.div>
-        )}
-        </AnimatePresence>
+        
       </div>
+      
       {isTrailer && <Trailer trailer_key={trailer} handleClose={handleClose} />}
     </>
   );

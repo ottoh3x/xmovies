@@ -9,6 +9,7 @@ import SideNav from "../components/nav/SideNav";
 import {useState} from "react"
 import { AnimatePresence } from "framer-motion";
 import { ToastContainer, toast, Flip } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -22,15 +23,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={Store}>
       <PersistGate loading={null} persistor={Persistor}>
-      <Sidebar handleSideNav={handleSideNav} />
-      <AnimatePresence>
-      {isOpen && <SideNav handleSideNav={handleSideNav}/>}
-      </AnimatePresence>
-      
-      <div className="bg-[#111] text-white  mx-auto   ">
-        <Component {...pageProps} />{" "}
-        <ToastContainer
-          position={"top-left"}
+      <ToastContainer
+          position={"top-center"}
           // onClick={() =>
           //   router.push(`/watching/${resumeId.anime_id}/${resumeId.episode}`)
           // }
@@ -40,6 +34,15 @@ function MyApp({ Component, pageProps }: AppProps) {
           draggablePercent={30}
           theme="colored"
         />
+      <Sidebar handleSideNav={handleSideNav} />
+      <AnimatePresence>
+      {isOpen && <SideNav handleSideNav={handleSideNav}/>}
+      </AnimatePresence>
+      
+      <div className="bg-[#111] text-white  mx-auto   ">
+
+        <Component {...pageProps} />{" "}
+        
       </div>
       <Footer />
       </PersistGate>
