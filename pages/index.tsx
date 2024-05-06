@@ -18,6 +18,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return { props: { res } };
 };
 
+
+
 const Home: NextPage = (res:any) => {
   const [trendingMovies, setTrendingMovies] = useState<any>([]);
   const [popularMovies, setPopularMovies] = useState<any>([]);
@@ -27,7 +29,7 @@ const Home: NextPage = (res:any) => {
   const [animeShows, setAnimeShows] = useState<any>([]);
   const [comedyShows,setComedyShows] = useState<any>([])
   const [dramaShows,setDramaShows] = useState<any>([])
-
+const [dt,setDt] = useState()
   const [fetchTrendingType, setFetchTrendingType] = useState("movie");
   const [fetchPopularType, setFetchPopularType] = useState("movie");
   const [fetchRatedType, setFetchRatedType] = useState("movie");
@@ -37,10 +39,33 @@ const Home: NextPage = (res:any) => {
   const sortedList = ContinueWatching?.sort((a:any, b:any) => b.time - a.time);
 
 
- 
+//   const data = async () =>  {
+    
+//  return
+//       {
+//         trendingMovies:[],
+//         popularMovies : [],
+//         latestMovies : (async () => {
+//           try {
+//               const response = await fetch(`https://api.themoviedb.org/3/${fetchRatedType}/top_rated?page=1&api_key=cfe422613b250f702980a3bbf9e90716`);
+//               const data = await response.json();
+//               console.log(data);
+//           } catch (error) {
+//               console.error("Failed to fetch data:", error);
+//           }
+//       })(),
+//         topRated : async () => await fetch(`https://api.themoviedb.org/3/${fetchRatedType}/top_rated?page=1&api_key=cfe422613b250f702980a3bbf9e90716`).then(res => res.json()),
+//         animeMovies : [],
+//         animeShows : [],
+//       }
+  
 
-console.log(ContinueWatching)
-console.log(CurrentState)
+      
+    
+//   }
+
+// console.log(dt)
+// console.log(async () => await fetch(`https://api.themoviedb.org/3/${fetchRatedType}/top_rated?page=1&api_key=cfe422613b250f702980a3bbf9e90716`).then(res => res.json()))
 
   useEffect(() => {
     fetchTrendingMovies();
@@ -51,6 +76,7 @@ console.log(CurrentState)
     topR();
     fetchAnimesMovies()
     fetchAnimeShows()
+    // data()
   }, [fetchTrendingType, fetchPopularType,fetchRatedType,fetchComedyType]);
 
 

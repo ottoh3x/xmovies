@@ -21,7 +21,7 @@ function Container(data : ContainerProps) {
     setSelected(!selected)
   }
   return data?.Data?.length > 0 ?(
-    <div className="w-full h-full mt-6 container mx-auto">
+    <div className="w-full h-full mt-6 container mx-auto min-h-screen">
     <div className="p-1 relative flex justify-between">
         <h1 className="font-black text-2xl">{data.heading}</h1>
         {data.select && (
